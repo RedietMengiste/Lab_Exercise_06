@@ -170,3 +170,47 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Tasks Cleared !!!");
   }
 });
+
+// .................................................................
+
+const displayFilter = function (tasks) {
+  taskList.innerHTML = "";
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    //add Attribute for delete
+    li.setAttribute("data-task-id", index + 1);
+    // Adding a class
+    li.className = "collection-item";
+    // Create text node and append it
+    li.appendChild(document.createTextNode(task.taskname));
+    // Create new element for the link
+    const link = document.createElement("a");
+    // Add class and the x marker for a
+    link.className = "delete-item secondary-content";
+    link.innerHTML = `
+              <span style = "margin-right:240px; color:#000">${task.date.toLocaleString()}</span>
+               <i class="fa fa-remove"></i>
+              &nbsp;
+              <a href="../../edit.html?id=${
+                index + 1
+              }"><i class="fa fa-edit"></i> </a>
+              ;`;
+    // Append link to li
+    li.appendChild(link);
+    // Append to UL
+    taskList.appendChild(li);
+  });
+};
+
+// Filter tasks function definition
+function filterTasks() {
+  let keyword = filter.value.toLowerCase();
+
+  let filterTaskList = tasks.filter(
+    (task) => task.taskname.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+  );
+  displayFilter(filterTaskList);
+}
+
+//   Filter Task
+filter.addEventListener("keyup", filterTasks);
