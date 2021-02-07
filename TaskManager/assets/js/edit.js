@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return;
     }
-
     /* 
         Instruction set to handle Update
 
