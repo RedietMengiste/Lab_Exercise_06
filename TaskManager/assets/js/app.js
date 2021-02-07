@@ -214,3 +214,21 @@ function filterTasks() {
 
 //   Filter Task
 filter.addEventListener("keyup", filterTasks);
+
+function sorting(e) {
+  let sortedTask;
+  if (e.target.innerText.toString().toLowerCase() === "newer first") {
+    sortedTask = tasks.sort(function (task1, task2) {
+      return task2.date.getTime() - task1.date.getTime();
+    });
+    e.target.innerText = "Older First";
+  } else {
+    sortedTask = tasks.sort(function (task1, task2) {
+      return task1.date - task2.date;
+    });
+    e.target.innerText = "Newer First";
+  }
+  displayFilter(sortedTask);
+}
+
+sortbtn.addEventListener("click", sorting);
